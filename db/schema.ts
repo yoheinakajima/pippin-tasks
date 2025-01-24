@@ -23,6 +23,15 @@ export const apiTests = pgTable("api_tests", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const metrics = pgTable("metrics", {
+  id: serial("id").primaryKey(),
+  endpoint: text("endpoint").notNull(),
+  method: text("method").notNull(),
+  responseTime: integer("response_time").notNull(), // in milliseconds
+  responseStatus: integer("response_status").notNull(),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+});
+
 export const taskRelations = relations(tasks, ({ many }) => ({
   apiTests: many(apiTests),
 }));
@@ -31,8 +40,12 @@ export const insertTaskSchema = createInsertSchema(tasks);
 export const selectTaskSchema = createSelectSchema(tasks);
 export const insertApiTestSchema = createInsertSchema(apiTests);
 export const selectApiTestSchema = createSelectSchema(apiTests);
+export const insertMetricSchema = createInsertSchema(metrics);
+export const selectMetricSchema = createSelectSchema(metrics);
 
 export type Task = typeof tasks.$inferSelect;
 export type NewTask = typeof tasks.$inferInsert;
 export type ApiTest = typeof apiTests.$inferSelect;
 export type NewApiTest = typeof apiTests.$inferInsert;
+export type Metric = typeof metrics.$inferSelect;
+export type NewMetric = typeof metrics.$inferInsert;

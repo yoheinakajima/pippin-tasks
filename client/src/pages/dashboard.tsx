@@ -6,7 +6,7 @@ import { StatusChart } from "@/components/tasks/status-chart";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { BeakerIcon, LayoutDashboard } from "lucide-react";
+import { BeakerIcon, LayoutDashboard, BarChart2 } from "lucide-react";
 
 export default function Dashboard() {
   const { data: tasks = [] } = useQuery({
@@ -25,7 +25,13 @@ export default function Dashboard() {
                 <span className="ml-2 text-xl font-bold">Task Manager</span>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-4">
+              <Link href="/metrics">
+                <Button variant="outline">
+                  <BarChart2 className="mr-2 h-4 w-4" />
+                  API Metrics
+                </Button>
+              </Link>
               <Link href="/test">
                 <Button variant="outline">
                   <BeakerIcon className="mr-2 h-4 w-4" />

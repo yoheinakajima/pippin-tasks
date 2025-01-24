@@ -4,6 +4,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import Dashboard from "@/pages/dashboard";
 import TestDashboard from "@/pages/test-dashboard";
+import MetricsDashboard from "@/pages/metrics-dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -11,6 +12,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Dashboard} />
       <Route path="/test" component={TestDashboard} />
+      <Route path="/metrics" component={MetricsDashboard} />
       <Route component={NotFound} />
     </Switch>
   );
