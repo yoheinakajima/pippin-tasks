@@ -7,7 +7,13 @@ import { eq } from "drizzle-orm";
 
 export function registerRoutes(app: Express): Server {
   const httpServer = createServer(app);
-  const wss = new WebSocketServer({ server: httpServer });
+  const wss = new WebSocketServer({ 
+    server: httpServer,
+    verifyClient: ({ req }) => {
+      // Ignore Vite HMR WebSocket connections
+      return !req.headers['sec-websocket-protocol']?.includes('vite-hmr');
+    }
+  });
 
   // WebSocket connection handling
   wss.on("connection", (ws) => {

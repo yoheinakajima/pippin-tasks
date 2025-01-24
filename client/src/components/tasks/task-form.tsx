@@ -72,7 +72,7 @@ export function TaskForm({ initialData }: TaskFormProps) {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ""} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -86,7 +86,7 @@ export function TaskForm({ initialData }: TaskFormProps) {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea {...field} value={field.value || ""} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -153,7 +153,7 @@ export function TaskForm({ initialData }: TaskFormProps) {
             <FormItem>
               <FormLabel>Assigned To</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ""} />
               </FormControl>
               <FormMessage />
             </FormItem>

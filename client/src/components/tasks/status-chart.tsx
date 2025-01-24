@@ -1,5 +1,8 @@
 import { Task } from "@db/schema";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
+import { useEffect } from "react";
+import { taskWebSocket } from "@/lib/websocket";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface StatusChartProps {
   tasks: Task[];
@@ -13,6 +16,18 @@ const COLORS = {
 };
 
 export function StatusChart({ tasks }: StatusChartProps) {
+  const queryClient = useQueryClient();
+
+  // Subscribe to WebSocket updates
+  useEffect(() => {
+    const unsubscribe = taskWebSocket.onMessage(() => {
+      // Invalidate tasks query to trigger a refresh
+      queryClient.invalidateQueries({ queryKey: ["/api/tasks"] });
+    });
+
+    return () => unsubscribe();
+  }, [queryClient]);
+
   const statusCounts = tasks.reduce(
     (acc, task) => {
       acc[task.status] = (acc[task.status] || 0) + 1;
