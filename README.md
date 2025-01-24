@@ -1,3 +1,5 @@
+*This tool was entirely built, tested, and open-sourced on Github using a combination of OpenAI's Operator using Replit Agent ([video](https://x.com/yoheinakajima/status/1882707264936845329)).*
+
 # Pippin Tasks
 
 A comprehensive API-based task management system designed for AI agents and teams, featuring advanced real-time monitoring, robust performance metrics tracking, and dynamic task tracking functionalities.
