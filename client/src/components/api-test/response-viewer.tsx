@@ -30,10 +30,14 @@ export function ResponseViewer({ tests }: ResponseViewerProps) {
               <div className="flex items-center space-x-4">
                 <Badge
                   className={`${
-                    statusColors[test.responseStatus.toString()[0]]
+                    statusColors[
+                      test.responseStatus
+                        ? test.responseStatus.toString()[0]
+                        : "5"
+                    ]
                   } text-white`}
                 >
-                  {test.responseStatus}
+                  {test.responseStatus || 500}
                 </Badge>
                 <span className="font-mono text-sm">
                   {test.method} {test.endpoint}
@@ -50,19 +54,29 @@ export function ResponseViewer({ tests }: ResponseViewerProps) {
                     <h4 className="text-sm font-semibold mb-2">Request Body</h4>
                     <pre className="bg-muted p-4 rounded-md overflow-x-auto">
                       <code>
-                        {JSON.stringify(JSON.parse(test.requestBody), null, 2)}
+                        {JSON.stringify(
+                          JSON.parse(test.requestBody),
+                          null,
+                          2
+                        )}
                       </code>
                     </pre>
                   </div>
                 )}
-                <div>
-                  <h4 className="text-sm font-semibold mb-2">Response Body</h4>
-                  <pre className="bg-muted p-4 rounded-md overflow-x-auto">
-                    <code>
-                      {JSON.stringify(JSON.parse(test.responseBody), null, 2)}
-                    </code>
-                  </pre>
-                </div>
+                {test.responseBody && (
+                  <div>
+                    <h4 className="text-sm font-semibold mb-2">Response Body</h4>
+                    <pre className="bg-muted p-4 rounded-md overflow-x-auto">
+                      <code>
+                        {JSON.stringify(
+                          JSON.parse(test.responseBody),
+                          null,
+                          2
+                        )}
+                      </code>
+                    </pre>
+                  </div>
+                )}
               </div>
             </AccordionContent>
           </AccordionItem>
